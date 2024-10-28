@@ -1,0 +1,42 @@
+body{
+    font-family: 'Merriweather';
+    background-color: #ffe173;
+    color: #333333;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    
+}
+
+/* Sections */
+.titulo {
+    text-align: center;
+    font-family: 'Algerian';
+    font-size: 2em;
+    color: #333333;
+}
+
+.services, .foods, .drinks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-item, .food-item, .drinks-item {
+    width: 30%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-item img, .food-item img, .drinks-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+.service-item,.food-item{
+    transition: transform 1s ease-in-out;
+}
+.service-item:hover ,.food-item:hover{
+    transform: scale(1.2);
+}

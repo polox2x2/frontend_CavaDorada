@@ -1,0 +1,72 @@
+
+.body-fondo{
+    background:linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
+    url('/FondoCavaDorada.jpeg')no-repeat center center fixed ;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-main{
+    color: rgb(215, 215, 215);
+    text-align: left;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex ;
+    margin:  5%;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    flex-direction: column;
+}
+.th-register{
+    padding-bottom: 10px;
+
+}
+.input-register{
+    height: 20px;
+    width: 220px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.register-div-button{
+    display: block;
+    padding-top: 10px;
+    text-align: center; 
+   
+}
+.register-button-register{
+    margin-right: 10px;
+    padding-left:15px ;
+    padding-right:15px ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.75);
+    font-size: medium;
+    
+}
+.register-button-atras{
+    margin-right: 10px;
+    padding-left:15px ;
+    padding-right:15px ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.75);
+    font-size: medium;
+}
+.register-seccion{
+    margin-top: -100px;
+}
+
+
+.register-footer{
+    background-color: rgba(123, 113, 88, 0.75);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    height: 40px;
+    color: white;
+    }

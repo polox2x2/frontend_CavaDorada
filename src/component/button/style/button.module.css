@@ -1,0 +1,13 @@
+.button-agregar{
+    color: white;
+    background-color: #7B0323;
+    border: 10px;
+    padding: 5px;
+    width: 70px;
+    border-radius: 5px;
+    transition: ease-in-out;
+}
+.button-agregar:hover{
+    transform: scale(1.2);
+    background-color: #99042c;
+}

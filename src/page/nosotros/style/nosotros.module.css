@@ -1,0 +1,84 @@
+
+.h1-nosotros{
+    transition:step-end ;
+}
+.h1-nosotros:hover{
+    color: #5a1010;
+    transform: rotate3d(2.3s);
+}
+.h1-nosotros{
+    padding-left: 43%;
+    display: flex;
+    margin: 1%;
+}
+.h1-descripcion{
+    color:rgba(0, 0, 0, 0.593);
+    text-align: center;
+}
+.h1-descripcion:hover{
+    color: black;
+    
+}
+.img-Nosotros {
+    height: 400px;
+    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    align-items: center;
+    display: block;
+    opacity: 0.5;
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+}
+.img-Nosotros:hover {
+    opacity: 1;
+    transform: scale(1.1); 
+}
+.h2-nosotros{
+    text-align: center;
+    font-weight: bold;
+}
+.p-quienesSomos {
+    padding-left: 3%;
+    padding-right:3%;
+    
+    
+}
+.p-quienesSomos-gerente{
+    padding-left: 3%;
+    padding-right:3%;
+    margin-bottom: 5%;
+}
+.p-i-quienesSomos{
+    font-weight: bold;
+    font-style: normal;
+    color: #99042c;
+}
+.h3-nosotros{
+    padding-left: 3% ;
+}
+.h4-nosotros{
+    padding-left: 3% ;
+    margin-bottom: -13px;
+}
+
+.div-advertencia{
+    display: flex;
+    justify-content: space-between;
+    
+    padding: 0%;
+    background-color: #E8D3A9;
+    
+}
+
+.p-quienesSomos-advertencia:hover{
+    color:#2E2714 ;
+    transform: scale(1.1);
+}
+.p-quienesSomos-advertencia {
+    padding-left: 10%;
+    margin: 1%;
+    color: rgba(0, 0, 0, 0.522);
+    font-weight: bold;
+    font-size: large;
+}

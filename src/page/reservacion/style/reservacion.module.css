@@ -1,0 +1,149 @@
+.div-image-mapa{
+    display: flex;
+   
+     
+  }
+  .img-mapa{
+      margin: 5%;
+      margin-left: 10%;
+      display: block;
+      border: #c2c2c2;
+      border-radius: 40px;
+      width: 400px;
+      border-style: solid;
+      border-width: 3px;
+      transition: ease;
+     
+  }
+  @keyframes moveRight {
+      from {
+          transform: translateX(1);
+      }
+      to {
+          transform: translateX(100px) scale(1.1);
+      }
+  }
+  .img-mapa:hover{
+      animation: moveRight 5s infinite alternate;
+      
+  }
+  .div-direccion{
+      margin: 3%;
+      margin-top: 11%;
+      margin-left: 7%;
+  }
+  .p-direccion{
+      color : black;
+      font-size: 23px;
+  }
+  .i-direccion{
+      color:red;
+      font-style:normal;
+      text-decoration: none;
+  }
+  
+  
+  
+  /*section-contacto */
+  
+  .p2-contacto{
+      text-align: left;
+      padding-right: 80px;
+      
+  
+  }
+  .h1-contacto{
+      margin: 5%;
+      margin-bottom: -5%;
+      color:  rgba(214, 13, 13, 0.77);
+      
+  }
+  .div-contacto{
+      display: flex;
+      margin: 5%;
+      margin-bottom: -2%;
+      padding-right: 30px;
+      font-size: 23px;
+      color: black;
+      
+  }
+  
+  .div-formulario{
+      margin-top: -8px ;
+  }
+  
+  #correo,#motivo,#comentario {
+    width: 300px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #4d3a09;
+  }
+  
+  .inp-correo {
+      height: 30px;
+      margin-bottom: 10px;
+  }
+  .inp-motivo{
+      height: 30px;
+      margin-bottom: 10px;
+  }
+  .inp-comentario{
+      height: 100px;
+      margin-bottom: 10px;
+  }
+  .button-enviar{
+       
+      width: 300px;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: #4d3a09;
+      height: 30px;
+      background-color: rgba(165, 8, 8, 0.77);
+  }
+  
+  @media (min-width: 1024px) {
+    
+ 
+    .p2-contacto, .p-direccion{
+        font-size: large;
+    }
+
+}
+@media(max-width:700px){
+    .div-image-mapa {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-mapa {
+        width: 80%;
+        max-width: none;
+        margin: 0;
+        margin-top: 10%;
+    }
+
+    .div-direccion {
+        margin-top: 5%;
+        margin-left: 0;
+    }
+
+    .div-contacto {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .div-formulario {
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .inp-correo, .inp-motivo, .inp-comentario, .button-enviar {
+        width: 90%;
+        max-width: 100%;
+    }
+    .p2-contacto,.p-direccion{
+        font-size: medium;
+    }
+    
+}

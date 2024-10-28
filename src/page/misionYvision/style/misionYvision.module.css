@@ -1,0 +1,67 @@
+
+
+.div-mision{
+    background: linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
+    url("/mision.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed ;
+    background-size: cover;
+    width: 100%;
+    padding: 5%;
+    color: white;
+    
+}
+.div-vision{
+    background: linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
+    url("/vision.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed ;
+    background-size: cover;
+    color: white;
+    padding: 5%;
+    width: 100%;
+
+   
+}
+.div-mision-vision{
+    display: flex;
+    text-align: center;
+    flex-wrap: nowrap;
+}
+
+
+.div-experiencia{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5%;
+    text-align: center;
+    color: white;
+    
+    
+}
+.div-experiencia{
+    background: linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
+    url("/misionIa.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed ;
+    background-size: cover;
+    
+}
+.h1-mision,.h1-vision,.h1-experiencia{
+    transition: transform 0.3s  ease-in-out;
+    margin: 20px;
+}
+ .p-mision{
+    margin: 20px;
+    transition: transform 0.3s  ease-in-out;
+    
+}
+.h1-mision:hover, .p-mision:hover,.h1-vision:hover,.h1-experiencia:hover{
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 0 9px rgba(255, 255, 255, 0.8)
+}
