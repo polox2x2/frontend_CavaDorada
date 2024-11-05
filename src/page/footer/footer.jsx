@@ -12,7 +12,7 @@ function Footer (){
               <li className={styles['li-footer']}><Link className={styles['link-footer']} to="#inicio">Inicio</Link></li>
               <li className={styles['li-footer']}><Link className={styles['link-footer']} to="/nosotros">Sobre nosotros</Link></li>
               <li className={styles['li-footer']}><Link className={styles['link-footer']} to="/tienda">Productos</Link></li>
-              <li className={styles['li-footer']}><Link className={styles['link-footer']} to="#">Servicios</Link></li>
+              <li className={styles['li-footer']}><Link className={styles['link-footer']} to="/servicios">Servicios</Link></li>
               <li className={styles['li-footer']}><Link className={styles['link-footer']} to="https://www.gob.pe/institucion/tuempresa/normas-legales/4292845-00002-2023-produce-tu-empresa">Legal</Link></li>
               <li className={styles['li-footer']}><Link className={styles['link-footer']}to="https://seminarium.pe/politicas-de-privacidad">Política de privacidad</Link></li>
               <li className={styles['li-footer']}><Link className={styles['link-footer']} to="#">Foro</Link></li>

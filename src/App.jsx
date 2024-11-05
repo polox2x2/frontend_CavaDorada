@@ -7,6 +7,7 @@ import Tienda from "./page/Tienda/tienda"
 import MisionYVision from "./page/misionYvision/misioYvision"
 import Reservación from "./page/reservacion/reservacion"
 import Nosotros from "./page/nosotros/nosotros"
+import Service from "./page/servicios/service"
 function App() {
 return( 
 <BrowserRouter>
@@ -22,7 +23,8 @@ return(
                 <Route path="tienda" element={<Tienda />} />
                 <Route path="misionyvision"element={<MisionYVision/>}/>
                 <Route path="reservacion" element={<Reservación/>}/>
-                <Route path="nosotros" element={<Nosotros/>}/>
+                <Route path="nosotros" element={<Nosotros/>}/> 
+                <Route path ="servicios" element = {<Service/>}/>
                 </Route>     
    </Routes> 
 
