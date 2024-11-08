@@ -1,12 +1,12 @@
 .footer {
     background-color: #2E2714;
     color: #D4AF37;
-    padding: auto;
+    padding:auto;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     flex-wrap: wrap;
-    margin-top: auto;
+   
     
 }
 .h3-footer{

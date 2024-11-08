@@ -1,0 +1,21 @@
+
+.button {
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    background-color: #ffe173;
+    width: 200px;
+    margin-left: 82%;
+  }
+  
+  @media (max-width : 1080px ){
+    .button {
+        border-radius: 5px;
+        padding: 5px;
+        display: flex;
+        background-color: #ffe173;
+        width: 7px;
+        margin-left: 50%;
+        animation: none;
+      }
+  }

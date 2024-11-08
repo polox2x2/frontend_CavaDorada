@@ -8,6 +8,9 @@ import MisionYVision from "./page/misionYvision/misioYvision"
 import Reservación from "./page/reservacion/reservacion"
 import Nosotros from "./page/nosotros/nosotros"
 import Service from "./page/servicios/service"
+import ListUser from "./prueba/ListUser"
+import CreateUser from "./prueba/CreateUser"
+import CartContext from "./component/cart/cartContext"
 function App() {
 return( 
 <BrowserRouter>
@@ -16,15 +19,19 @@ return(
 
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/listaUsuario" element = {<ListUser/>} />
+                <Route path="/CrearUsuario" element = {<CreateUser/>} />
                 
+
                 <Route path="" element={<MainLayout />}>
                 <Route index element={<Principal />} /> 
-                <Route path="/principal" element={<Principal />} />
+                <Route path="principal" element={<Principal />} />
                 <Route path="tienda" element={<Tienda />} />
                 <Route path="misionyvision"element={<MisionYVision/>}/>
                 <Route path="reservacion" element={<Reservación/>}/>
                 <Route path="nosotros" element={<Nosotros/>}/> 
                 <Route path ="servicios" element = {<Service/>}/>
+                <Route path="compra" element ={<CartContext/>}/>
                 </Route>     
    </Routes> 
 
