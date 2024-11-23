@@ -1,8 +1,8 @@
 
 import { useState } from 'react';
 import styles from '../login/style/login.module.css';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../connection/Axios';
 
 function Login() { 
 
@@ -28,20 +28,22 @@ function Login() {
   e.preventDefault(); //previene el recargo de la pagina
   
   try {
-    const response = await axios.post('http://localhost:8080/api/cliente/login',{ 
+    const response = await axiosInstance.post('/api/cliente/login',{ 
       email: formData.email,
       clave: formData.clave
   });
     //condicional para ver si el login es exitoso, se dirige a la principal
     if (response.status === 200){
       alert('Login Exitoso', response.data);
+      console.log("")
       window.location.href = '/';
     }
       
-    
+
 
   }catch (error){ 
     alert('Correo o Clave fallido,Intente Nuevamente');
+    console.log("Hubo un error")
     console.error("Error en el login:", error.response);
   }
  };

@@ -55,7 +55,6 @@ function Register () {
 
   });
   console.log('cliente registrado ', response.data);
-  alert('registrado con exito');
 
 //validacion de la respuesta 
   if(response.status === 200){ 

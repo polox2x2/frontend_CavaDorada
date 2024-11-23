@@ -1,14 +1,5 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    cursor: url('/color-caput-mortuum-cursor-marron.png'), auto;
-    font-family: 'Merriweather';
-}
-a{
-    text-decoration: none;
-    color:rgba(0, 0, 0, 0.582);
-    cursor: url("/color-caput-mortuum-pointer-marron.png"), pointer;
-}
+
+
 .body-fondo{
     background:linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
     url('/FondoCavaDorada.jpeg')no-repeat center center fixed ;

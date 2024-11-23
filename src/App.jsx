@@ -9,6 +9,8 @@ import Reservación from "./page/reservacion/reservacion"
 import Nosotros from "./page/nosotros/nosotros"
 import Service from "./page/servicios/service"
 import CartContext from "./component/cart/cartContext"
+import ListProducto from "./prueba/ListProducto"
+import ListaArray from "./prueba/ListaArray"
 function App() {
 return( 
 <BrowserRouter>
@@ -17,8 +19,9 @@ return(
 
              <Route path="/login" element={<Login />} />
              <Route path="/register" element={<Register />} />
-           
-
+            <Route path="/listado" element={<ListProducto/>} />
+            <Route path="/listadoArray" element={<ListaArray/>} />
+            
              <Route path="" element={<MainLayout />}>
              <Route index element={<Principal />} /> 
              <Route path="principal" element={<Principal />} />

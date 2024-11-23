@@ -1,6 +1,12 @@
 html, body {
-    
+    cursor: url('/color-caput-mortuum-cursor-marron.png'), auto;
+    font-family: 'Merriweather';
     margin: 0;
     padding: 0;
     height: 100%;
+}
+a{
+    text-decoration: none;
+    color:rgba(0, 0, 0, 0.582);
+    cursor: url("/color-caput-mortuum-pointer-marron.png"), pointer;
 }
