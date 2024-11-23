@@ -107,7 +107,10 @@ function Tienda (){
                        type='submit'/>
                        
                     </div>
+                    
                 </div>
+                
+                
                 <div className={styles['producto']}>
                     <img src="./VodkaSmirnoffGreenApple.png" alt="Vodka Smirnoff Green Apple 700 ml" />
                     <hr />

@@ -1,9 +1,10 @@
-import PaypalButtonComponent from "../component/paypal/PaypalButtton";
+import { useEffect, useState } from "react"
 
 export default function ListUser (){
+    
     return (
           <>
-          <PaypalButtonComponent />
+
           
           </>
 
