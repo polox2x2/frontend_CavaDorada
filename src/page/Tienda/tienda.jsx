@@ -1,109 +1,97 @@
-import React, { useEffect, useState } from "react";
-import ButtonAgregar from "../../component/button/button";
-import styles from "./style/tienda.module.css";
-import obtenerImagenPorNombre from "../../component/imageDina/image";
+import React, { useState, useEffect } from 'react';
+import ButtonAgregar from "../../component/button/button";  // Usamos el componente de botón
+import styles from './style/tienda.module.css';
 import axiosInstance from "../../connection/Axios";
+import obtenerImagenPorNombre from "../../component/imageDina/image";
+import { useCart } from '../../component/cart/CartProviderContext';
 
 function Tienda() {
-   
-    const [licores, setLicores] = useState([]);
-    const [comidas, setComidas] = useState([]);
-    const [cart, setCart] = useState([]);
+  const { addToCart } = useCart();  // Usamos la función addToCart del contexto
+  const [licores, setLicores] = useState([]);
+  const [comidas, setComidas] = useState([]);
+ 
+  const clienteId = localStorage.getItem('clienteId');
+ 
 
-    // Cargar productos desde el backend
-    useEffect(() => {
-        
-        // Cargar licores
-        const listaLicores = async () => {
-            try {
-                const responseLicor = await axiosInstance.get("/api/cart/licores");
-                const productosLicor = responseLicor.data.map((prod) => ({
-                    ...prod,
-                    imagen: obtenerImagenPorNombre(prod.nombre), // Asocia imágenes por nombre
-                }));
-                setLicores(productosLicor); // Actualiza el estado de licores
-                console.log("Licores cargados con éxito");
-            } catch (error) {
-                console.error("Error al cargar licores:", error);
-            }
-        };
-
-        // Cargar comidas
-        const listaComidas = async () => {
-            try {
-                const responseComida = await axiosInstance.get("/api/cart/comidas");
-                const productosComida = responseComida.data.map((prod) => ({
-                    ...prod,
-                    imagen: obtenerImagenPorNombre(prod.nombre), // Asocia imágenes por nombre
-                }));
-                setComidas(productosComida); // Actualiza el estado de comidas
-                console.log("Comidas cargadas con éxito");
-            } catch (error) {
-                console.error("Error al cargar comidas:", error);
-            }
-        };
-
-        listaLicores();
-        listaComidas();
-    }, []);
-
-    // Agregar productos al carrito
-    const handleAddToCart = (item) => {
-        setCart((prevCart) => [...prevCart, item]);
-        alert(`${item.nombre} agregado al carrito`);
+  //cargar productos del backend
+  useEffect(() => {
+    const listaLicores = async () => {
+      try {
+        const responseLicor = await axiosInstance.get("/api/cart/licores");
+        const productosLicor = responseLicor.data.map((prod) => ({
+          ...prod,
+          imagen: obtenerImagenPorNombre(prod.nombre),  // Asignar imagen a cada producto
+        }));
+        setLicores(productosLicor);
+      } catch (error) {
+        console.error("Error al cargar licores:", error);
+      }
     };
 
-    return (
-        <>
-            {/* Filtros */}
-            <section className={styles["filtros"]}>
-                <select>
-                    <option>Precio</option>
-                    <option>Ordenar</option>
-                    <option>Categoría</option>
-                </select>
-                <input type="search" placeholder="Buscar..." />
-            </section>
+    const listaComidas = async () => {
+      try {
+        const responseComida = await axiosInstance.get("/api/cart/comidas");
+        const productosComida = responseComida.data.map((prod) => ({
+          ...prod,
+          imagen: obtenerImagenPorNombre(prod.nombre),  // Asignar imagen a cada producto
+        }));
+        setComidas(productosComida);
+      } catch (error) {
+        console.error("Error al cargar comidas:", error);
+      }
+      
+    }
 
-            {/* Catálogo de Licores */}
-            <h2 className={styles["h2"]}>Catálogo de Licores</h2>
-            <section className={styles["catalogo"]}>
-                {licores.map((item) => (
-                    <div key={item.idProducto} className={styles["producto"]}>
-                        {item.imagen && <img src={item.imagen} alt={item.nombre} />}
-                        <hr />
-                        <h4 className={styles["h4"]}>{item.nombre}</h4>
-                        <p>Precio: {item.precios}</p>
-                        <div className={styles["div-button"]}>
-                            <ButtonAgregar
-                                label="Agregar"
-                                onClick={() => handleAddToCart(item)}
-                            />
-                        </div>
-                    </div>
-                ))}
-            </section>
-                
-            {/* Catálogo de Comidas */}
-            <h2 className={styles["h2"]}>Catálogo de Comidas</h2>
-            <section className={styles["catalogo"]}>
-                {comidas.map((item) => (
-                    <div key={item.idProducto} className={styles["producto"]}>
-                        {item.imagen && <img src={item.imagen} alt={item.nombre} />}
-                        <hr />
-                        <h4 className={styles["h4"]}>{item.nombre}</h4>
-                        <p>Precio: {item.precios}</p>
-                        <div className={styles["div-button"]}>
-                            <ButtonAgregar
-                                label="Agregar"
-                                onClick={() => handleAddToCart(item)}
-                            />
-                        </div>
-                    </div>
-                ))}
-            </section>
-        </>
-    );
+    listaLicores();
+    listaComidas();
+   
+  }, [clienteId]);
+
+  // Función para agregar al carrito con cantidad desde la alerta
+  const handleAddToCart = (item) => {
+    // Pedir la cantidad mediante una alerta
+    const cantidad = parseInt(prompt(`¿Cuántas unidades de ${item.nombre} deseas agregar al carrito?`));
+
+    // Verificar que la cantidad sea válida
+    if (isNaN(cantidad) || cantidad <= 0) {
+      alert("Por favor, ingresa una cantidad válida.");
+    } else {
+      addToCart(item, cantidad);  // Agregar el producto al carrito con la cantidad seleccionada
+      alert(`${item.nombre} agregado al carrito con ${cantidad} unidades.`);
+    }
+  };
+
+  return (
+    <div>
+      {/* Muestra los productos de licores */}
+      <h2>Catálogo de Licores</h2>
+      <section className={styles.catalogo}>
+        {licores.map((item) => (
+          <div key={item.idProducto} className={styles.producto}>
+            {item.imagen && <img src={item.imagen} alt={item.nombre} />}
+            <hr/>
+            <h4>{item.nombre}</h4>
+            <p>Precio: {item.precios}</p>
+            <ButtonAgregar label="Agregar al carrito" onClick={() => handleAddToCart(item)} />
+          </div>
+        ))}
+      </section>
+
+      {/* Muestra los productos de comidas */}
+      <h2>Catálogo de Comidas</h2>
+      <section className={styles.catalogo}>
+        {comidas.map((item) => (
+          <div key={item.idProducto} className={styles.producto}>
+            {item.imagen && <img src={item.imagen} alt={item.nombre} />}
+            <hr/>
+            <h4>{item.nombre}</h4>
+            <p>Precio: {item.precios}</p>
+            <ButtonAgregar label="Agregar al carrito" onClick={() => handleAddToCart(item)} />
+          </div>
+        ))}
+      </section>
+    </div>
+  );
 }
 
 export default Tienda;
