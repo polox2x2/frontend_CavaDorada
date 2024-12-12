@@ -1,6 +1,17 @@
 import styles from './style/reservacion.module.css'
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useEffect } from "react";
 
-function Reservación (){
+function Reservación() {
+    const containerStyle = {
+        width: "100%",
+        height: "400px",
+      };
+    
+      const center = {
+        lat: -14.071324, // Coordenadas de Ica, Perú
+        lng: -75.736387,
+      };
     return (
 
         <>
@@ -24,7 +35,11 @@ function Reservación (){
                 </section>
                 <section>
                     <div className={styles['div-image-mapa']}>
-                        <img className={styles['img-mapa']} src="./mapa.png" alt="Mapa" />
+                    <LoadScript googleMapsApiKey="AIzaSyCNwEdG9_fCNtUaKh8VoAWUSlUPAkGC_rs">
+                    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
+                     <Marker position={center} />
+                        </GoogleMap>
+                        </LoadScript>
                         <div className={styles['div-direccion']}>
                             <p className={styles['p-direccion']}>Nos puedes ubicar en este locales físico:
                                 <br /><br />

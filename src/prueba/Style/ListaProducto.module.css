@@ -1,0 +1,90 @@
+/* Contenedor principal */
+.login-container {
+  width: 80%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo para el formulario */
+.login-form-container {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.login-form-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-form-group {
+  margin-bottom: 10px;
+}
+
+.login-form-group label {
+  font-weight: bold;
+}
+
+.login-form-group input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form-actions button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-form-actions button[type="button"] {
+  background-color: #f44336;
+}
+
+/* Estilos para la tabla */
+.login-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.login-table th, .login-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.login-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.login-table td {
+  text-align: center;
+}
+
+.login-table button {
+  padding: 6px 12px;
+  margin: 5px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-table button:hover {
+  background-color: #0056b3;
+}

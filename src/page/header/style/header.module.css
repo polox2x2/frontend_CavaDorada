@@ -1,24 +1,24 @@
+
 .header {
     background-color: #D4AF37;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 10px;
     height: 100%;
     min-height: 100%;
 
 }
 
 .img-logo {
-    height: 50px;
+    height: 80px;
+    margin: -5px;
     transition: transform 0.3s ease-in-out; 
 }
-
 
 .img-logo:hover {
     transform: scale(1.2) rotate(360deg); 
 }
-
 .nav {
     display:flex;
     gap: 30px;
@@ -85,6 +85,8 @@
 }
 
 
+
+
 .hamburger-menu {
     display: none; 
     flex-direction: column;
@@ -102,29 +104,61 @@
 
 
 @media (max-width: 859px) {
+    /* Contenedor para el logo y el menú hamburguesa */
+    .nav-container {
+        display: flex;
+        justify-content: space-between;  /* Distribuye los elementos entre los extremos */
+        align-items: center;  /* Alinea los elementos verticalmente en el centro */
+        width: 100%;
+    }
+
+    /* Menú hamburguesa */
+    .hamburger-menu {
+        display: flex;
+        order: 0;  /* El menú hamburguesa estará a la izquierda */
+    }
+
+    /* Logo */
+    .img-logo {
+        display: flex;
+        order: 1;  /* El logo estará a la derecha del menú hamburguesa */
+    }
+
+    /* Mostrar el menú de navegación solo cuando el menú hamburguesa esté abierto */
     .nav {
-        display: none; 
+        display: flex;
         flex-direction: column;
         width: 50%;
         height: 88%;
         gap: 15px;
         align-items: center;
-        background-color: #D4AF37; 
-        position:absolute;
-        top: 60px;
+        background-color: #D4AF37;
+        position: absolute;
+        top: 128px;
         left: 0;
         z-index: 1;
-        
+        transform: translateX(-100%); /* El menú comienza fuera de la pantalla */
+        opacity: 0; /* Inicialmente invisible */
+        transition: transform 0.3s ease, opacity 0.3s ease; /* Transiciones suaves */
     }
-
-    .img-logo{
-        display: flex;
+    
+    .nav.show {
+        transform: translateX(0); /* El menú se mueve hacia la posición visible */
+        opacity: 1; /* Hacemos el menú visible */
     }
+    
 
-    .hamburger-menu {
-        display: flex; 
+    /* Personalización de las barras del menú hamburguesa */
+    .bar {
+        width: 10px;
+        height: 2px;
+        margin: 2px 0;
+        background-color: black;
     }
 }
+
+
+
 
 
 .nav.show {

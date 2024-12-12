@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// src/page/login/login.js
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../connection/Axios';
 import styles from './style/login.module.css';
+import AuthContext from '../../component/context/AuthContext';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ function Login() {
   });
   const [message, setMessage] = useState('');  // Manejo de mensaje de error
   const navigate = useNavigate();  // Usar React Router para la navegación
+  const { login } = useContext(AuthContext); // Consumir AuthContext
 
   // Capturar cambios de los inputs
   const handleInputChange = (e) => {
@@ -44,6 +47,9 @@ function Login() {
         localStorage.setItem('clienteTelefono', cliente.telefono);  
         localStorage.setItem('clienteDocumentoIdentidad', cliente.documentoIdentidad);
         
+        // Actualizar el contexto Auth
+        login(cliente);
+        
         alert('Login Exitoso');
         
         // Redirigir al usuario al inicio o página principal
@@ -76,10 +82,10 @@ function Login() {
                 />
               </label>
 
-              <label htmlFor="">
+              <label htmlFor="clave">
                 <p className={styles['login-p-clave']}>Contraseña</p>
                 <input
-                  id="contrasinal"
+                  id="clave"
                   type="password"
                   name="clave"
                   className={styles['login-input-clave']}
@@ -91,6 +97,7 @@ function Login() {
               </label>
               <div className={styles['div-buttons']}>
                 <button type="submit" className={styles['button-login']}>Login</button>
+                <Link className={styles['button-register']} to="/register" >Register</Link>
               </div>
             </form>
           </section>

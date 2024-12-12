@@ -8,7 +8,7 @@ const PaypalButtonComponent = () => {
     const [price, setPrice] = useState (0);
     const initialOptions = {
     "client-id": "AVIAeO8TFYJMKDVrU69tGiit4LmCouqFyI_OkXobJcAPTYZeGDGe1SAoooD3GD0iLlX9cO4I2SlHq-aL" , 
-    currency : "USD" , 
+    currency : "PEN" , 
     intent : "capture" , 
     }
 
@@ -19,7 +19,7 @@ const PaypalButtonComponent = () => {
         purchase_units:[
         {
             amount:{
-                currency_code:"USD",
+                currency_code:"PEN",
                 value:price
             }
         }

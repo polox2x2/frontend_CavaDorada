@@ -41,21 +41,22 @@
 
 /* Catálogo de productos */
 .catalogo {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
     gap: 20px;
     padding: 20px;
+    justify-items: center;
 }
 
 .producto {
     background-color: white;
     border-radius: 10px;
-    width: 200px;
-    text-align: center;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .producto img {
@@ -64,16 +65,16 @@
     border-radius: 8px;
 }
 
-.producto, .h4 {
-    margin: 15px 0;
-    font-size: 1.1em;
-    color: #333;
-}
-
 .producto p {
     color: #FFA500; 
     font-size: 1em;
     margin: initial;
+}
+
+.producto, .h4 {
+    margin: 15px 0;
+    font-size: 1.1em;
+    color:#333;
 }
 .div-button{
     display: flex;

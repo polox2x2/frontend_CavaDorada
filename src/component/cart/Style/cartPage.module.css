@@ -1,0 +1,147 @@
+/* Contenedor principal */
+.contenedor-carrito {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+  }
+  
+  /* Contenido del carrito */
+  .contenido-carrito {
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  /* Contenedor principal */
+  .contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Productos en el carrito */
+  .productos-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Producto individual */
+  .producto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Imagen del producto */
+  .imagen-producto img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+  
+  /* Detalles del producto */
+  .datos-producto {
+    flex: 1;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nombre-producto {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .descripcion-producto {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .precio-producto {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Acciones del producto */
+  .acciones-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .boton-eliminar {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .boton-eliminar:hover {
+    background-color: darkred;
+  }
+  
+  /* Resumen del total */
+  .resumen-total {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .titulo-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .valor-total {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Acciones de pago */
+  .acciones-pago {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .boton-pagar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .boton-pagar:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Contenedor del botón PayPal */
+  .contenedor-boton-paypal {
+    width: 100%;
+    max-width: 300px;
+  }
+  

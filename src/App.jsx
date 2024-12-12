@@ -12,6 +12,8 @@ import Service from './page/servicios/service';
 import ListProducto from './prueba/ListProducto';
 import CartPage from './component/cart/CartPage';
 import { CartProvider } from './component/cart/CartProviderContext';
+import { AuthProvider } from './component/context/AuthContext';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,23 +29,27 @@ function App() {
 
   return (
     <BrowserRouter>
+    <AuthProvider>
       <CartProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path='/admin' element={<ListProducto/>}/>
+
           <Route path="/" element={<MainLayout />}>
             
             <Route index element={<Principal />} /> 
-            <Route path="principal" element={<Principal />} /> 
-            <Route path="tienda" element={<Tienda />} />
-            <Route path="misionyvision" element={<MisionYVision />} />
-            <Route path="reservacion" element={<Reservación />} />
-            <Route path="nosotros" element={<Nosotros />} />
-            <Route path="servicios" element={<Service />} />
+            <Route path="/principal" element={<Principal />} /> 
+            <Route path="/tienda" element={<Tienda />} />
+            <Route path="/misionyvision" element={<MisionYVision />} />
+            <Route path="/reservacion" element={<Reservación />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/servicios" element={<Service />} />
             <Route path="/compra" element={<CartPage />} />
           </Route>
         </Routes>
       </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
