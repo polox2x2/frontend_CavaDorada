@@ -1,212 +1,260 @@
-import { useState, useEffect } from "react";
-import axiosInstance from "../connection/Axios";
-import ButtonAgregar from "../component/button/button"; // Botón para agregar producto
-import styles from './Style/ListaProducto.module.css'; // Importar el archivo de CSS Modules
+import React, { useState, useEffect, useCallback } from "react";
+import axiosInstance from "../connection/Axios"; // Asegúrate de que este archivo está correctamente configurado para hacer peticiones
+import ButtonAgregar from "../component/button/button";
+import styles from './Style/ListaProducto.module.css';
 
-export default function ListProducto() {
+const FormularioActualizarProducto = ({ productoId, cerrarFormulario }) => {
+  const [producto, setProducto] = useState({
+    nombre: '',
+    precios: '',
+    stock: '',
+    descripcion: '',
+    estado: true,
+    categoria: { idCategoria: '', descripcion: '' },
+    provedor: { idProvedor: '', nombre: '' }
+  });
+
+  const [categorias, setCategorias] = useState([]);
+  const [provedores, setProvedores] = useState([]);
+
+  // Cargar categorías, proveedores y producto
+  useEffect(() => {
+    // Cargar categorías
+    axiosInstance.get('/api/categoria')  // Endpoint de categorías
+      .then(response => {
+        setCategorias(response.data);
+      })
+      .catch(error => console.error('Error al obtener categorías', error));
+
+    // Cargar proveedores
+    axiosInstance.get('/api/provedor')  // Endpoint de proveedores
+      .then(response => {
+        setProvedores(response.data);
+      })
+      .catch(error => console.error('Error al obtener proveedores', error));
+
+    // Cargar datos del producto
+    axiosInstance.get(`/api/cart/productos/${productoId}`)
+      .then(response => {
+        setProducto(response.data);
+      })
+      .catch(error => console.error('Error al obtener producto', error));
+  }, [productoId]);
+
+  // Manejo de cambios en el formulario
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProducto(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  // Manejo del envío del formulario (actualizar producto)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const productoActualizado = {
+      nombre: producto.nombre,
+      precios: parseFloat(producto.precios),
+      stock: parseInt(producto.stock),
+      descripcion: producto.descripcion,
+      estado: producto.estado,
+      categoria: { idCategoria: parseInt(producto.categoria.idCategoria) },
+      provedor: { idProvedor: parseInt(producto.provedor.idProvedor) }
+    };
+
+    // Enviar la actualización al backend
+    axiosInstance.put(`/api/cart/actualizar/${productoId}`, productoActualizado)
+      .then(response => {
+        alert('Producto actualizado exitosamente');  // Alerta de éxito
+        cerrarFormulario();  // Cerrar el formulario después de actualizar
+      })
+      .catch(error => {
+        alert('Error al actualizar producto');  // Alerta de error
+        console.error('Error al actualizar producto', error);
+      });
+  };
+
+  return (
+    <div className={styles['form-container']}>
+      <h2>Actualizar Producto</h2>
+      <form onSubmit={handleSubmit}>
+        <div className={styles['form-group']}>
+          <label>Nombre:</label>
+          <input
+            type="text"
+            name="nombre"
+            value={producto.nombre}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label>Precio:</label>
+          <input
+            type="number"
+            name="precios"
+            value={producto.precios}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label>Cantidad:</label>
+          <input
+            type="number"
+            name="stock"
+            value={producto.stock}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label>Descripción:</label>
+          <input
+            type="text"
+            name="descripcion"
+            value={producto.descripcion}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label>Estado:</label>
+          <select name="estado" value={producto.estado ? "1" : "0"} onChange={handleChange}>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+          </select>
+        </div>
+        <div className={styles['form-group']}>
+          <label>Categoría:</label>
+          <select
+            name="categoria.idCategoria"
+            value={producto.categoria.idCategoria}
+            onChange={handleChange}
+            required
+          >
+            {categorias.map(categoria => (
+              <option key={categoria.idCategoria} value={categoria.idCategoria}>
+                {categoria.descripcion}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles['form-group']}>
+          <label>Proveedor:</label>
+          <select
+            name="provedor.idProvedor"
+            value={producto.provedor.idProvedor}
+            onChange={handleChange}
+            required
+          >
+            {provedores.map(provedor => (
+              <option key={provedor.idProvedor} value={provedor.idProvedor}>
+                {provedor.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles['form-actions']}>
+          <button type="submit">Actualizar</button>
+          <button type="button" onClick={cerrarFormulario}>Cancelar</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const ListProducto = () => {
   const [productos, setProductos] = useState([]);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [showForm, setShowForm] = useState(false); // Para mostrar/ocultar el formulario de agregar/actualizar
+  const [showForm, setShowForm] = useState(false);
 
-  // Cargar productos
-  const MostrarProductos = async () => {
+  // Función para cargar los productos
+  const cargarProductos = useCallback(async () => {
     try {
-      const response = await axiosInstance.get("/api/cart/productos/licores");
+      const response = await axiosInstance.get("/api/cart/licores"); // Llamada para obtener todos los productos
       setProductos(response.data || []);
-    } catch (e) {
-      console.error("Error, no se pudieron cargar los productos: " + e);
+    } catch (error) {
+      console.error("Error al cargar los productos:", error);
+    }
+  }, []);
+
+  // Función para eliminar el producto
+  const eliminarProducto = async (idProducto) => {
+    const confirmacion = window.confirm("¿Estás seguro de que deseas desactivar este producto?");
+    if (confirmacion) {
+      try {
+        const response = await axiosInstance.put(`/api/cart/eliminar/${idProducto}`);
+        if (response.status === 200) {
+          console.log("Producto desactivado correctamente");
+          cargarProductos(); // Recargar productos después de desactivar
+        }
+      } catch (error) {
+        console.error("Error al desactivar el producto:", error);
+      }
     }
   };
 
-  // Eliminar producto (eliminación lógica)
-  const eliminarProducto = async (id, stock) => {
-    if (!stock || stock <= 0) {
-      alert("No se puede eliminar un producto con stock 0 o no definido.");
-      return;
-    }
-  
-    try {
-      // Enviar la solicitud para reducir el stock
-      await axiosInstance.put(`/api/cart/reducir-stock/${id}?cantidad=${stock}`);
-      alert("Producto eliminado exitosamente. Estado cambiado si el stock llegó a 0.");
-      MostrarProductos(); // Actualizar la lista de productos
-    } catch (e) {
-      console.error("Error al eliminar el producto: " + e);
-      alert("Error al eliminar el producto.");
-    }
-  };
-  
-  // Actualizar producto
-  const actualizarProducto = (id) => {
-    // Buscar producto por ID
-    const producto = productos.find((p) => p[0] === id);
-    setProductoSeleccionado(producto); // Establecer producto seleccionado para editar
+  // Función para mostrar el formulario de actualización
+  const actualizarProducto = (producto) => {
+    setProductoSeleccionado(producto); // Cargar el producto seleccionado en el formulario
     setShowForm(true); // Mostrar el formulario de actualización
   };
 
-  // Agregar producto
-  const agregarProducto = () => {
-    setProductoSeleccionado(null); // No hay producto seleccionado
-    setShowForm(true); // Mostrar formulario vacío para agregar
-  };
-
-  // Enviar formulario (crear o actualizar producto)
-  const enviarFormulario = async (producto) => {
-    try {
-      if (productoSeleccionado) {
-        // Si existe un producto seleccionado, se actualizará
-        await axiosInstance.put(`/api/cart/actualizar/${productoSeleccionado[0]}`, producto);
-      } else {
-        // Si no existe un producto seleccionado, se agregará uno nuevo
-        await axiosInstance.post("/api/cart/crear", producto);
-      }
-      setShowForm(false); // Ocultar formulario después de guardar
-      MostrarProductos(); // Volver a cargar los productos
-    } catch (e) {
-      console.error("Error al guardar el producto: " + e);
-    }
-  };
-
-  // Manejar cierre del formulario
+  // Función para cerrar el formulario
   const cerrarFormulario = () => {
     setShowForm(false);
   };
 
-  // Cargar los productos al montar el componente
   useEffect(() => {
-    MostrarProductos();
-  }, []);
+    cargarProductos();
+  }, [cargarProductos]);
 
-  // Renderizar productos
-  const RenderizarProductos = () => {
+  const renderProductos = () => {
     if (!productos || productos.length === 0) {
       return (
         <tr>
-          <td colSpan="9">No hay productos disponibles</td>
+          <td colSpan="5">No hay productos disponibles.</td>
         </tr>
       );
     }
-    return productos.map((producto, index) => (
-      <tr key={producto[0]}>
-        <td>{index + 1}</td>
-        <td>{producto[1]}</td>
-        <td>{producto[2]}</td>
-        <td>{producto[3].descripcion}</td>
-        <td>{producto[4]}</td>
-        <td>{producto[5]}</td>
-        <td>{producto[6] ? "Activo" : "Inactivo"}</td>
+
+    return productos.map(producto => (
+      <tr key={producto.idProducto}>
+        <td>{producto.nombre}</td>
+        <td>{producto.precios}</td>
+        <td>{producto.stock}</td>
+        <td>{producto.estado ? "Activo" : "Inactivo"}</td>
         <td>
-          <ButtonAgregar label="Actualizar" onClick={() => actualizarProducto(producto[0])} />
-          <ButtonAgregar label="Eliminar" onClick={() => eliminarProducto(producto[6])} />
+          <button onClick={() => actualizarProducto(producto)}>Actualizar</button>
+          <button onClick={() => eliminarProducto(producto.idProducto)}>Eliminar</button>
         </td>
       </tr>
     ));
   };
 
   return (
-    <div className={styles['login-container']}>
-      <h1>Gestión de Productos</h1>
-
-      {/* Formulario para agregar o actualizar un producto */}
-      {showForm && (
-        <div className={styles['login-form-container']}>
-          <h2>{productoSeleccionado ? "Actualizar Producto" : "Agregar Producto"}</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const newProducto = {
-                nombre: e.target.nombre.value,
-                descripcion: e.target.descripcion.value,
-                proveedor: e.target.proveedor.value,
-                categoria: e.target.categoria.value,
-                precio: e.target.precio.value,
-                stock: e.target.stock.value,
-                estado: true,
-              };
-              enviarFormulario(newProducto);
-            }}
-          >
-            <div className={styles['login-form-group']}>
-              <label>Nombre:</label>
-              <input
-                type="text"
-                name="nombre"
-                defaultValue={productoSeleccionado ? productoSeleccionado[1] : ""}
-                required
-              />
-            </div>
-            <div className={styles['login-form-group']}>
-              <label>Descripción:</label>
-              <input
-                type="text"
-                name="descripcion"
-                defaultValue={productoSeleccionado ? productoSeleccionado[3].descripcion : ""}
-                required
-              />
-            </div>
-            <div className={styles['login-form-group']}>
-              <label>Precio:</label>
-              <input
-                type="text"
-                name="precio"
-                defaultValue={productoSeleccionado ? productoSeleccionado[5] : ""}
-                required
-              />
-            </div>
-            <div className={styles['login-form-group']}>
-              <label>Categoría:</label>
-              <input
-                type="text"
-                name="categoria"
-                defaultValue={productoSeleccionado ? productoSeleccionado[4] : ""}
-                required
-              />S
-            </div>
-            <div className={styles['login-form-group']}>
-              <label>Proveedor:</label>
-              <input
-                type="number"
-                name="proveedor"
-                defaultValue={productoSeleccionado ? productoSeleccionado[2] : ""}
-                required
-              />
-            </div>
-            <div className={styles['login-form-group']}>
-              <label>Stock:</label>
-              <input
-                type="number"
-                name="stock"
-                defaultValue={productoSeleccionado ? productoSeleccionado[6] : ""}
-                required
-              />
-            </div>
-            <div className={styles['login-form-actions']}>
-              <button type="submit">{productoSeleccionado ? "Actualizar" : "Agregar"}</button>
-              <button type="button" onClick={cerrarFormulario}>Cancelar</button>
-            </div>
-          </form>
-        </div>
-      )}
-
-      {/* Botón para agregar un producto */}
-      <ButtonAgregar label="Agregar Producto" onClick={agregarProducto} />
-
-      {/* Tabla de productos */}
-      <table className={styles['login-table']}>
+    <div>
+      <h2>Productos</h2>
+      {showForm && <FormularioActualizarProducto productoId={productoSeleccionado.idProducto} cerrarFormulario={cerrarFormulario} />}
+      <table>
         <thead>
           <tr>
-            <th>#</th>
             <th>Nombre</th>
-            <th>Proveedor</th>
-            <th>Categoria</th>
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>{RenderizarProductos()}</tbody>
+        <tbody>
+          {renderProductos()}
+        </tbody>
       </table>
     </div>
   );
-}
+};
+
+export default ListProducto;

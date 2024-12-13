@@ -35,11 +35,7 @@ function Reservación() {
                 </section>
                 <section>
                     <div className={styles['div-image-mapa']}>
-                    <LoadScript googleMapsApiKey="AIzaSyCNwEdG9_fCNtUaKh8VoAWUSlUPAkGC_rs">
-                    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
-                     <Marker position={center} />
-                        </GoogleMap>
-                        </LoadScript>
+                    <img className={styles['img-mapa']} src="./mapa.png" alt="Mapa" />
                         <div className={styles['div-direccion']}>
                             <p className={styles['p-direccion']}>Nos puedes ubicar en este locales físico:
                                 <br /><br />

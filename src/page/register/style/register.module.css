@@ -1,72 +1,134 @@
-
-.body-fondo{
-    background:linear-gradient(rgba(64, 68, 77, 0.75), rgba(64, 68, 77, 0.75)),
-    url('/FondoCavaDorada.jpeg')no-repeat center center fixed ;
+/* Fondo Principal */
+.body-fondo {
+    background: linear-gradient(
+        rgba(255, 223, 115, 0.7), /* Dorado suave */
+        rgba(255, 192, 89, 0.7) /* Amarillo cálido */
+    ), 
+    url('/FondoCavaDorada.jpeg') no-repeat center center fixed;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease;
 }
 
-.register-main{
-    color: rgb(215, 215, 215);
-    text-align: left;
-    font-size: large;
+/* Estilo Principal del Formulario */
+.register-main {
+    color: #2e2e2e; /* Gris oscuro para contraste */
+    text-align: center;
+    font-size: 1.1em;
     font-family: 'Times New Roman', Times, serif;
-    display: flex ;
-    margin:  5%;
+    display: flex;
+    margin: 5%;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 70 vh; /* Ajustado para que ocupe más altura */
     flex-direction: column;
+    background: rgba(255, 255, 255, 0.85); /* Fondo blanco translúcido */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
-.th-register{
-    padding-bottom: 10px;
 
+/* Estilos de los Títulos */
+.th-register {
+    font-size: 2.5em;
+    color: #3e3e3e; /* Gris oscuro */
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 15px;
 }
-.input-register{
-    height: 20px;
-    width: 220px;
+
+/* Estilo para los campos de entrada */
+.input-register {
+    height: 35px;
+    width: 250px;
+    padding: 0 10px;
+    margin: 10px 0;
     font-family: 'Times New Roman', Times, serif;
+    border: 2px solid #c49d4c; /* Dorado suave */
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.register-div-button{
-    display: block;
-    padding-top: 10px;
-    text-align: center; 
-   
-}
-.register-button-register{
-    margin-right: 10px;
-    padding-left:15px ;
-    padding-right:15px ;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-    font-size: medium;
-    
-}
-.register-button-atras{
-    margin-right: 10px;
-    padding-left:15px ;
-    padding-right:15px ;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-    font-size: medium;
-}
-.register-seccion{
-    margin-top: -100px;
+/* Efecto de Focus para los Inputs */
+.input-register:focus {
+    border-color: #8f6f2f; /* Dorado oscuro */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Estilos para el contenedor de los botones */
+.register-div-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 10px;
+}
 
-.register-footer{
-    background-color: rgba(123, 113, 88, 0.75);
+/* Botón de Registro */
+.register-button-register,
+.register-button-atras {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background-color: #c49d4c; /* Dorado suave */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto Hover de los Botones */
+.register-button-register:hover,
+.register-button-atras:hover {
+    background-color: #8f6f2f; /* Dorado oscuro */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Efecto Focus de los Botones */
+.register-button-register:focus,
+.register-button-atras:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la Sección de Registro */
+.register-seccion {
+    margin-top: -80px; /* Ajustado el margen superior */
+    padding-bottom: 30px;
+}
+
+/* Pie de Página */
+.register-footer {
+    background-color: #8f6f2f; /* Dorado oscuro */
     position: absolute;
     bottom: 0;
     width: 100%;
-    
-    height: 40px;
+    height: 60px; /* Aumento la altura */
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Estilo para el Fondo del Body */
+@media (max-width: 768px) {
+    .body-fondo {
+        background-attachment: scroll; /* Evita el efecto fijo en móviles */
     }
+    .register-main {
+        width: 90%;
+        height: auto; /* Ajustamos para que no se corte en pantallas pequeñas */
+    }
+    .register-footer {
+        font-size: 0.9em;
+        height: 50px;
+    }
+}

@@ -12,6 +12,10 @@
     font-size: 1em;
     background-color: #FFF;
 }
+/*Precio*/
+.p-precio{
+    color: red;
+}
 
 /* Títulos */
 .h2 {
@@ -81,4 +85,39 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+/* Estilo para el contenedor de la barra de búsqueda */
+.buscar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Estilo para el campo de entrada de búsqueda */
+.buscar input {
+    width: 350px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.buscar input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para el icono de búsqueda */
+.buscar .icono-busqueda {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 20px;
 }

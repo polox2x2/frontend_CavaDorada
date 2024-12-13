@@ -1,90 +1,110 @@
-/* Contenedor principal */
-.login-container {
-  width: 80%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-}
+/* Estilos específicos para el componente */
 
-/* Estilo para el formulario */
-.login-form-container {
-  margin-bottom: 20px;
+.form-container {
   padding: 20px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-}
-
-.login-form-container h2 {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+}
+
+.form-container h2 {
   text-align: center;
+  color: #333;
 }
 
-.login-form-group {
-  margin-bottom: 10px;
+.form-group {
+  margin-bottom: 20px;
 }
 
-.login-form-group label {
+.form-group label {
+  display: block;
+  color: #555;
+  margin-bottom: 8px;
   font-weight: bold;
 }
 
-.login-form-group input {
+.form-group input,
+.form-group select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
-.login-form-actions {
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+.form-actions {
   display: flex;
   justify-content: space-between;
-}
-
-.login-form-actions button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.login-form-actions button[type="button"] {
-  background-color: #f44336;
-}
-
-/* Estilos para la tabla */
-.login-table {
-  width: 100%;
-  border-collapse: collapse;
   margin-top: 20px;
 }
 
-.login-table th, .login-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-}
-
-.login-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-.login-table td {
-  text-align: center;
-}
-
-.login-table button {
-  padding: 6px 12px;
-  margin: 5px;
+.form-actions button {
+  padding: 10px 20px;
   border: none;
-  background-color: #007BFF;
-  color: white;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 16px;
+  border-radius: 4px;
+  width: 48%;
 }
 
-.login-table button:hover {
-  background-color: #0056b3;
+.form-actions button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.form-actions button[type="button"] {
+  background-color: #f44336;
+  color: white;
+}
+
+.form-actions button:hover {
+  opacity: 0.8;
+}
+
+.table-container {
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px;
+  font-size: 14px;
+}
+
+table button:hover {
+  background-color: #d32f2f;
 }

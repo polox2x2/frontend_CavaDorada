@@ -4,11 +4,12 @@ import { jsPDF } from "jspdf";
 import axiosInstance from '../../connection/Axios';  
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";  
 import styles from './Style/cartPage.module.css';  
-
+import { motion } from 'framer-motion';
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useCart();  // Accedemos al carrito y funciones
   const [clientData, setClientData] = useState(null);  // Estado para los datos del cliente
   const [price, setPrice] = useState(0);  // Estado para el precio total
+  const [showDiscountModal, setShowDiscountModal] = useState(false); 
 
   const initialOptions = {
     "client-id": "AVIAeO8TFYJMKDVrU69tGiit4LmCouqFyI_OkXobJcAPTYZeGDGe1SAoooD3GD0iLlX9cO4I2SlHq-aL", 
@@ -24,7 +25,32 @@ function CartPage() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
   
-
+  //mostrar el Modal 
+  useEffect(() => {
+    const hasLiquor = cart.some(item => item.categoria === "licor");  // Verifica si hay licores
+    if (hasLiquor) {
+      setShowDiscountModal(true);  // Muestra el modal si hay licores
+    }
+  }, [cart]);
+  
+  const DiscountModal = () => {
+    return (
+      <div className={styles['modal']}>
+        <div className={styles['modal-content']}>
+          <h3>¡Descuento Especial en Licores!</h3>
+          <p>Estás recibiendo un descuento especial en ellos.</p>
+          
+          <button 
+            onClick={() => setShowDiscountModal(false)} 
+            className={styles['boton-cerrar']}
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    );
+  };
+  
   
 
   // Esta función se llama al cargar la página para obtener los datos del cliente desde localStorage
@@ -275,44 +301,69 @@ function CartPage() {
 
   return (
     <div className={styles['contenedor-carrito']}>
-  {clientData ? (
-    <div className={styles['contenido-carrito']}>
-      <h2 className={styles['titulo-bienvenida']}>Bienvenido, {clientData.nombre}</h2>
-      {cart.length > 0 ? (
-        <div className={styles['contenedor-principal']}>
-          <div className={styles['productos-carrito']}>
-            {cart.map((item) => (
-              <div key={item.idProducto} className={styles['producto']}>
-                <div className={styles['imagen-producto']}>
-                  <img src={item.imagen} alt={item.nombre} className={styles["imagen"]}/>
-                </div>
-                <div className={styles['datos-producto']}>
-                  <h4 className={styles['nombre-producto']}>{item.nombre}</h4>
-                  <p className={styles['precio-producto']}>Cantidad <br/> <br/> {item.stock}</p>
-                  <p className={styles['precio-producto']}>Precio <br/><br/>${item.precios}</p>
-                  <p className={styles['precio-producto']}>Cantidad <br/><br/> {item.cantidad}</p>
-                </div>
-                <div className={styles['acciones-producto']}>
-                  <button
-                    className={styles['boton-eliminar']}
-                    onClick={() => handleRemoveFromCart(item.idProducto)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+        {showDiscountModal && <DiscountModal />} 
 
+      {clientData ? (
+        <div className={styles['contenido-carrito']}>
+          <h2 className={styles['titulo-bienvenida']}>Bienvenido, {clientData.nombre}</h2>
+          <h3>Tu Carrito de Compras</h3>
+          {cart.length > 0 ? (
+            <motion.div 
+              className={styles["catalogo"]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <ul>
+                {cart.map((item) => (
+                  <motion.li 
+                    key={item["idProducto"]}
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className={styles["producto"]}>
+                      <motion.img 
+                        src={item.imagen} 
+                        alt={item.nombre} 
+                        initial={{ width: '100px', height: '100px' }}  // Tamaño inicial
+                        animate={{ width: '150px', height: '150px' }}  // Tamaño cuando la animación se active
+                        transition={{ duration: 0.5 }} // Tiempo de transición
+                        style={{ objectFit: 'cover', borderRadius: '8px' }} 
+                        whileHover={{ scale: 1.1 }} 
+                      />
+                      <h4>{item.nombre}</h4>
+                      <p>Precio:  ${item.precios} USD</p>
+                      <p>Cantidad:  {item.cantidad}</p>
+                      <motion.button 
+                        className={styles['boton-eliminar']}
+                        onClick={() => handleRemoveFromCart(item.idProducto)}
+                        whileHover={{ scale: 1.05 }}
+                        
+                      >
+                        Eliminar
+                      </motion.button>
+                    </div>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          ) : (
+            <p>No tienes productos en el carrito.</p>
+          )}
+  
           <div className={styles['resumen-total']}>
             <h3 className={styles['titulo-total']}>Total</h3>
             <p className={styles['valor-total']}>${price}</p>
           </div>
-
+  
           <div className={styles['acciones-pago']}>
-            <button className={styles['boton-pagar']} 
+            <button 
+              className={styles['boton-pagar']} 
               onClick={handleBuy}
-            >Procesar Pago</button>
+            >
+              Procesar Pago
+            </button>
             <div className={styles['contenedor-boton-paypal']}>
               <PayPalScriptProvider options={initialOptions}>
                 <PayPalButtons
@@ -329,11 +380,6 @@ function CartPage() {
         <p className={styles['mensaje-carrito-vacio']}>No hay productos en el carrito</p>
       )}
     </div>
-  ) : (
-    <p className={styles['mensaje-sin-datos-cliente']}>No se encontró información de cliente.</p>
-  )}
-</div>
-
   );
 }
 

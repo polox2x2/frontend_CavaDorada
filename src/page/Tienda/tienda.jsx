@@ -125,7 +125,7 @@ function Tienda() {
               {item.imagen && <img src={item.imagen} alt={item.nombre} />}
               <hr />
               <h4>{item.nombre}</h4>
-              <p>Precio: {item.precios}</p>
+              <p className={styles["p-precio"]}>Precio: ${item.precios}</p>
               <ButtonAgregar label="Agregar al carrito" onClick={() => handleAddToCart(item)} />
             </div>
           ))
